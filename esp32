@@ -1,0 +1,29 @@
+#define LED 2
+#define BOTAO 4
+// Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
+const int Vin = 34;
+const int Vout = 35;
+// variable for storing the potentiometer value
+int VinValue = 0;
+int VoutValue = 0;
+float seg = 0;
+bool buttom =false;
+
+
+void setup() {
+  pinMode(LED, OUTPUT);
+  pinMode(BOTAO, INPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  buttom = digitalRead(BOTAO);
+  while(buttom){
+    VinValue = analogRead(Vin);
+    VoutValue = analogRead(Vout);
+    delay(50);
+    seg = seg + 0.05;
+    Serial.println(VoutValue);
+  }
+  
+}
